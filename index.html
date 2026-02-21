@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keli Ballinger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Sora:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap"
+rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f0e;
+    --bg-elevated: #151614;
+    --cream: #ede8df;
+    --cream-muted: #c4bfb3;
+    --teal: #3a8b8b;
+    --teal-light: #5aadad;
+    --teal-glow: #2a7a7a;
+    --teal-soft: rgba(58,139,139,0.08);
+    --sage: #7a9e8e;
+    --warm-gray: #8a857a;
+    --divider: rgba(58,139,139,0.15);
+    --accent-warm: #c4a265;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    background: var(--bg);
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: 'Sora', sans-serif;
+    color: var(--cream);
+    background: var(--bg);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--teal);
+    color: var(--cream);
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512
+512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter
+id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75'
+numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect
+width='100%25' height='100%25' filter='url(%23n)'
+opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 2rem 3.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    font-style: italic;
+    color: var(--cream-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--cream);
+    text-decoration: none;
+    opacity: 0.5;
+    transition: all 0.3s;
+  }
+
+  .nav-links a:hover {
+    opacity: 1;
+    color: var(--teal-light);
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10rem 3.5rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    right: -5%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, rgba(58,139,139,0.04) 0%,
+transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    left: -10%;
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(circle, rgba(122,158,142,0.03) 0%,
+transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    color: var(--teal-light);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(4.5rem, 11vw, 11rem);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    max-width: 950px;
+  }
+
+  .hero-line {
+    display: block;
+    overflow: hidden;
+  }
+
+  .hero-line-inner {
+    display: block;
+    transform: translateY(110%);
+    animation: clipReveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .hero-line:nth-child(1) .hero-line-inner { animation-delay: 0.4s; }
+  .hero-line:nth-child(2) .hero-line-inner { animation-delay: 0.6s; }
+
+  .hero-headline .first-name {
+    letter-spacing: 0.02em;
+  }
+
+  .hero-headline .last-name {
+    font-weight: 400;
+    color: var(--teal-light);
+  }
+
+  .hero-sub {
+    font-family: 'Sora', sans-serif;
+    font-weight: 200;
+    font-size: clamp(1rem, 1.8vw, 1.35rem);
+    line-height: 1.7;
+    max-width: 540px;
+    margin-top: 3rem;
+    color: var(--warm-gray);
+    opacity: 0;
+    animation: fadeUp 0.8s 1s forwards;
+  }
+
+  .hero-scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    right: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.4s forwards;
+  }
+
+  .scroll-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--warm-gray);
+    writing-mode: vertical-lr;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--teal), transparent);
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  /* ─── DIVIDERS ─── */
+  .divider-section { padding: 0 3.5rem; }
+  .divider-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--divider),
+var(--teal), var(--divider), transparent);
+  }
+
+  /* ─── MARQUEE ─── */
+  .marquee-section {
+    padding: 2.5rem 0;
+    overflow: hidden;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 45s linear infinite;
+  }
+
+  .marquee-item {
+    font-family: 'Sora', sans-serif;
+    font-weight: 200;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    white-space: nowrap;
+    padding: 0 1.5rem;
+  }
+
+  .marquee-sep {
+    color: var(--teal);
+    padding: 0 0.3rem;
+    font-size: 0.45rem;
+    display: flex;
+    align-items: center;
+  }
+
+  /* ─── PHILOSOPHY ─── */
+  .philosophy {
+    padding: 10rem 3.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .phil-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+    gap: 8rem;
+    align-items: start;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--teal-light);
+    margin-bottom: 2.5rem;
+  }
+
+  .phil-statement {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.35;
+    font-weight: 400;
+  }
+
+  .phil-statement em {
+    font-style: italic;
+    color: var(--teal-light);
+  }
+
+  .phil-right { padding-top: 0.5rem; }
+
+  .phil-body {
+    font-family: 'Sora', sans-serif;
+    font-weight: 300;
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--cream-muted);
+  }
+
+  .phil-body p + p { margin-top: 1.5rem; }
+
+  .phil-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--divider);
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: var(--teal-light);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--warm-gray);
+    margin-top: 0.5rem;
+    line-height: 1.4;
+  }
+
+  /* ─── VALUES RIBBON ─── */
+  .values-ribbon {
+    padding: 5rem 3.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .values-intro {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--cream-muted);
+    margin-bottom: 2rem;
+  }
+
+  .values-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .value-tag {
+    font-family: 'Sora', sans-serif;
+    font-weight: 300;
+    font-size: 0.75rem;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid rgba(58,139,139,0.2);
+    border-radius: 100px;
+    color: var(--cream-muted);
+    transition: all 0.35s;
+    cursor: default;
+    letter-spacing: 0.02em;
+  }
+
+  .value-tag:hover {
+    border-color: var(--teal);
+    color: var(--teal-light);
+    background: var(--teal-soft);
+  }
+
+  /* ─── WORK ─── */
+  .work {
+    padding: 6rem 3.5rem 10rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 600;
+  }
+
+  .section-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--warm-gray);
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--divider);
+  }
+
+  .project-card {
+    position: relative;
+    padding: 3rem 2.5rem;
+    background: var(--bg);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--teal);
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .project-card:hover { background: var(--bg-elevated); }
+  .project-card:hover::after { width: 100%; }
+
+  .project-idx {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--teal);
+    letter-spacing: 0.12em;
+    margin-bottom: 1.2rem;
+  }
+
+  .project-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.7rem;
+    transition: color 0.3s;
+    letter-spacing: -0.01em;
+  }
+
+  .project-card:hover .project-name { color: var(--teal-light); }
+
+  .project-desc {
+    font-family: 'Sora', sans-serif;
+    font-weight: 300;
+    font-size: 0.85rem;
+    color: var(--warm-gray);
+    line-height: 1.65;
+  }
+
+  .project-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .project-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--teal);
+    border: 1px solid rgba(58,139,139,0.3);
+    padding: 0.25rem 0.7rem;
+    border-radius: 2px;
+  }
+
+  .project-arrow {
+    position: absolute;
+    top: 2.5rem;
+    right: 2.5rem;
+    font-size: 0.9rem;
+    color: var(--teal-light);
+    opacity: 0;
+    transform: translate(-8px, 8px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .project-card:hover .project-arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  .project-card--no-link {
+    cursor: default;
+  }
+
+  .project-card--no-link:hover {
+    background: var(--bg-elevated);
+  }
+
+  .project-card--no-link::after {
+    background: var(--teal);
+    opacity: 0.4;
+  }
+
+  .project-card--overflow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .project-card--overflow .project-idx {
+    font-size: 0.55rem;
+    color: var(--teal-light);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-overflow-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .project-overflow-list span {
+    font-family: 'Sora', sans-serif;
+    font-weight: 300;
+    font-size: 0.8rem;
+    color: var(--cream-muted);
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(58,139,139,0.15);
+    border-radius: 100px;
+    transition: all 0.3s;
+  }
+
+  .project-overflow-list span:last-child {
+    font-style: italic;
+    border-color: transparent;
+    color: var(--warm-gray);
+    padding-left: 0.2rem;
+  }
+
+  .project-overflow-list span:hover {
+    border-color: var(--teal);
+    color: var(--teal-light);
+  }
+
+  /* ─── APPROACH ─── */
+  .approach {
+    padding: 8rem 3.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .approach-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--divider);
+    margin-top: 4rem;
+  }
+
+  .approach-card {
+    background: var(--bg);
+    padding: 3rem 2.5rem;
+  }
+
+  .approach-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--teal-light);
+  }
+
+  .approach-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+
+  .approach-text {
+    font-family: 'Sora', sans-serif;
+    font-weight: 300;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--warm-gray);
+  }
+
+  /* ─── DOMAINS ─── */
+  .domains {
+    padding: 8rem 3.5rem;
+    position: relative;
+  }
+
+  .domains::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 0%,
+rgba(58,139,139,0.02) 40%, rgba(58,139,139,0.02) 60%, transparent
+100%);
+    pointer-events: none;
+  }
+
+  .domains-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .domain-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 3rem;
+  }
+
+  .domain-pill {
+    font-family: 'Sora', sans-serif;
+    font-weight: 300;
+    font-size: 0.85rem;
+    padding: 0.7rem 1.6rem;
+    border: 1px solid rgba(58,139,139,0.2);
+    border-radius: 100px;
+    color: var(--cream-muted);
+    transition: all 0.35s;
+    cursor: default;
+  }
+
+  .domain-pill:hover {
+    border-color: var(--teal);
+    color: var(--teal-light);
+    background: var(--teal-soft);
+    transform: translateY(-2px);
+  }
+
+  /* ─── POWERHOUSE MOMENT ─── */
+  .powerhouse-moment {
+    padding: 6rem 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .powerhouse-text {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .powerhouse-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .pw-line {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(5rem, 14vw, 14rem);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--cream);
+    opacity: 0.06;
+    user-select: none;
+  }
+
+  .pw-line-soul {
+    font-weight: 400;
+    font-style: italic;
+    color: var(--teal-light);
+    opacity: 0.08;
+  }
+
+  /* ─── CONNECT ─── */
+  .connect {
+    padding: 10rem 3.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .connect-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 6rem;
+    align-items: end;
+  }
+
+  .connect-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .connect-headline em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--teal-light);
+  }
+
+  .connect-body {
+    font-family: 'Sora', sans-serif;
+    font-weight: 300;
+    font-size: 0.95rem;
+    color: var(--cream-muted);
+    line-height: 1.8;
+  }
+
+  .connect-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: 'Sora', sans-serif;
+    font-weight: 400;
+    font-size: 0.9rem;
+    color: var(--cream);
+    text-decoration: none;
+    padding: 1.1rem 2.5rem;
+    border: 1px solid var(--teal);
+    margin-top: 2.5rem;
+    transition: all 0.4s;
+    letter-spacing: 0.03em;
+  }
+
+  .connect-cta:hover {
+    background: var(--teal);
+    color: var(--bg);
+  }
+
+  .connect-cta span { transition: transform 0.3s; }
+  .connect-cta:hover span { transform: translateX(4px); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 3.5rem;
+    border-top: 1px solid var(--divider);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .footer-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--warm-gray);
+  }
+
+  .footer-center {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--cream-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .footer-right {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--warm-gray);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes clipReveal {
+    from { transform: translateY(110%); }
+    to { transform: translateY(0); }
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1000px) {
+    nav { padding: 1.5rem 2rem; }
+    .nav-links { display: none; }
+    .hero { padding: 7rem 2rem 5rem; }
+    .hero-scroll-indicator { display: none; }
+    .philosophy { padding: 6rem 2rem; }
+    .phil-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .work { padding: 4rem 2rem 6rem; }
+    .project-grid { grid-template-columns: 1fr; }
+    .approach { padding: 6rem 2rem; }
+    .approach-grid { grid-template-columns: 1fr; }
+    .domains { padding: 5rem 2rem; }
+    .values-ribbon { padding: 4rem 2rem; }
+    .quote-section { padding: 6rem 2rem; }
+    .connect { padding: 6rem 2rem; }
+    .connect-grid { grid-template-columns: 1fr; gap: 3rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center;
+padding: 2.5rem 2rem; }
+  }
+
+  @media (max-width: 600px) {
+    .phil-stats { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .stat-number { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-mark"></div>
+  <ul class="nav-links">
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#connect">Connect</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Creative Catalyst · Explorer · Builder ·
+Discoverer</div>
+  <h1 class="hero-headline">
+    <span class="hero-line"><span class="hero-line-inner"><span
+class="first-name">Love</span></span></span>
+    <span class="hero-line"><span class="hero-line-inner"><span
+class="last-name">Villella</span></span></span>
+  </h1>
+  <p class="hero-sub">
+    Finding extraordinary potential in the places everyone else overlooks.
+    Building platforms, research, and systems that shift how people see —
+    and what becomes possible when they do.
+  </p>
+
+  <div class="hero-scroll-indicator">
+    <div class="scroll-text">Explore</div>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider-section"><div class="divider-line"></div></div>
+
+<!-- MARQUEE -->
+<section class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item">Transformation</span><span
+class="marquee-sep">●</span>
+    <span class="marquee-item">Psychology</span><span
+class="marquee-sep">●</span>
+    <span class="marquee-item">Film</span><span class="marquee-sep">●</span>
+    <span class="marquee-item">Wellness</span><span class="marquee-sep">●</span>
+    <span class="marquee-item">AI Ethics</span><span
+class="marquee-sep">●</span>
+    <span class="marquee-item">Systems Thinking</span><span
+class="marquee-sep">●</span>
+    <span class="marquee-item">Innovation</span><span
+class="marquee-sep">●</span>
+    <span class="marquee-item">Values</span><span class="marquee-sep">●</span>
+    <span class="marquee-item">Technology</span><span
+class="marquee-sep">●</span>
+    <span class="marquee-item">Mind-Body</span><span
+class="marquee-sep">●</span>
+    <span class="marquee-item">Curation</span><span class="marquee-sep">●</span>
+    <span class="marquee-item">Research</span><span class="marquee-sep">●</span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item">Transformation</span><span
+class="marquee-sep">●</span>
+    <span class="marquee-item">Psychology</span><span
+class="marquee-sep">●</span>
+    <span class="marquee-item">Film</span><span class="marquee-sep">●</span>
+    <span class="marquee-item">Wellness</span><span class="marquee-sep">●</span>
+    <span class="marquee-item">AI Ethics</span><span
+class="marquee-sep">●</span>
+    <span class="marquee-item">Systems Thinking</span><span
+class="marquee-sep">●</span>
+    <span class="marquee-item">Innovation</span><span
+class="marquee-sep">●</span>
+    <span class="marquee-item">Values</span><span class="marquee-sep">●</span>
+    <span class="marquee-item">Technology</span><span
+class="marquee-sep">●</span>
+    <span class="marquee-item">Mind-Body</span><span
+class="marquee-sep">●</span>
+    <span class="marquee-item">Curation</span><span class="marquee-sep">●</span>
+    <span class="marquee-item">Research</span><span class="marquee-sep">●</span>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider-section"><div class="divider-line"></div></div>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophy">
+  <div class="phil-grid">
+    <div class="reveal">
+      <div class="section-label">01 — Philosophy</div>
+      <div class="phil-statement">
+        When you change the way you <em>see</em> things, the things
+you see <em>change.</em>
+      </div>
+    </div>
+    <div class="phil-right reveal reveal-delay-1">
+      <div class="phil-body">
+        <p>The unwanted, the discarded, the overlooked — these aren't
+dead ends. They're raw material. Where attention meets ingenuity,
+hidden potential reveals itself in the most unexpected places.</p>
+        <p>This lens has been the through-line across everything —
+film, wellness, technology, psychology, AI, and the spaces between
+disciplines where the most interesting things happen. It's why I built
+reVISION: to collect the evidence that perspective shifts change
+everything.</p>
+      </div>
+      <div class="phil-stats">
+        <div>
+          <div class="stat-number">300+</div>
+          <div class="stat-label">Transformation<br>Stories Curated</div>
+        </div>
+        <div>
+          <div class="stat-number">12</div>
+          <div class="stat-label">Categories<br>of Change</div>
+        </div>
+        <div>
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Ways to See<br>Differently</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-ribbon reveal" id="values">
+  <div class="section-label">02 — Values That Drive Everything</div>
+  <div class="values-intro">These aren't aspirational — they're
+operational. They shape what I build, who I work with, and how.</div>
+  <div class="values-grid">
+    <span class="value-tag">Authenticity</span>
+    <span class="value-tag">Connection</span>
+    <span class="value-tag">Transformation</span>
+    <span class="value-tag">Curiosity</span>
+    <span class="value-tag">Health & Well-Being</span>
+    <span class="value-tag">Freedom</span>
+    <span class="value-tag">Kindness</span>
+    <span class="value-tag">Resourcefulness</span>
+    <span class="value-tag">Service</span>
+    <span class="value-tag">Integrity</span>
+    <span class="value-tag">Gratitude</span>
+    <span class="value-tag">Wisdom</span>
+    <span class="value-tag">Trust</span>
+    <span class="value-tag">Depth</span>
+    <span class="value-tag">Collaboration</span>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="work" id="work">
+  <div class="section-header reveal">
+    <h2 class="section-title">What I'm Exploring Now</h2>
+    <span class="section-meta">Platforms · Research · Exploration</span>
+  </div>
+
+  <div class="project-grid">
+    <a class="project-card reveal" href="https://revisionance.com"
+target="_blank">
+      <div class="project-idx">01</div>
+      <div class="project-name">reVISION</div>
+      <div class="project-desc">A living archive exploring how
+perspective shifts transform everything — from science and art to the
+stories hiding in plain sight. 300+ curated examples across twelve
+categories.</div>
+      <div class="project-meta">
+        <span class="project-tag">Platform</span>
+        <span class="project-tag">Live</span>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <a class="project-card reveal" href="https://revisionawards.com"
+target="_blank">
+      <div class="project-idx">02</div>
+      <div class="project-name">The reVISION Awards</div>
+      <div class="project-desc">Recognizing filmmakers and creators
+whose work embodies the transformative power of changed perspective. A
+short film competition surfacing what others miss.</div>
+      <div class="project-meta">
+        <span class="project-tag">Awards</span>
+        <span class="project-tag">Live</span>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <a class="project-card reveal" href="https://pastofnow.com" target="_blank">
+      <div class="project-idx">03</div>
+      <div class="project-name">Past of Now</div>
+      <div class="project-desc">Using today's AI tools to listen to
+yesterday's stories. A creative lab exploring historical filmmaking,
+ancestral narratives, and what happens when forgotten voices get new
+technology.</div>
+      <div class="project-meta">
+        <span class="project-tag">Film</span>
+        <span class="project-tag">AI</span>
+        <span class="project-tag">Active</span>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <div class="project-card reveal project-card--no-link">
+      <div class="project-idx">04</div>
+      <div class="project-name">Archival Regeneration</div>
+      <div class="project-desc">Going into archives not to preserve
+but to regenerate — bringing forgotten health wisdom, overlooked
+research, and buried stories back into active usefulness. Mining
+history for what the mainstream missed.</div>
+      <div class="project-meta">
+        <span class="project-tag">Research</span>
+        <span class="project-tag">Active</span>
+      </div>
+    </div>
+
+    <a class="project-card reveal"
+href="https://aterstallaco.github.io/untoldtails/" target="_blank">
+      <div class="project-idx">05</div>
+      <div class="project-name">Untold Tails</div>
+      <div class="project-desc">What if animals could tell their own
+stories? Bringing hidden, remarkable animal journeys to life through
+animated voices and creativity. Behind every pair of eyes is a
+survival, a transformation, a tale worth hearing.</div>
+      <div class="project-meta">
+        <span class="project-tag">Content</span>
+        <span class="project-tag">In Development</span>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <div class="project-card reveal project-card--no-link">
+      <div class="project-idx">06</div>
+      <div class="project-name">Resonance & Meaning-Based Discovery</div>
+      <div class="project-desc">What if search wasn't about keywords
+but about meaning? Exploring new ways to surface connections,
+patterns, and insights based on resonance rather than relevance
+alone.</div>
+      <div class="project-meta">
+        <span class="project-tag">Concept</span>
+        <span class="project-tag">Exploration</span>
+      </div>
+    </div>
+
+    <!-- UNCOMMENT TO ADD "ALSO EXPLORING" CARD
+    <div class="project-card reveal project-card--no-link
+project-card--overflow">
+      <div class="project-idx">+ Also exploring</div>
+      <div class="project-overflow-list">
+        <span>• Moonshot Masterclass</span>
+        <span>• AI & Wellbeing Research</span>
+        <span>• Generative AI Education</span>
+        <span>• Genealogical Audiobooks</span>
+        <span>• and whatever's next...</span>
+      </div>
+    </div>
+    -->
+  </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="approach" id="approach">
+  <div class="section-header reveal">
+    <h2 class="section-title">How I Work</h2>
+    <span class="section-meta">Principles</span>
+  </div>
+
+  <div class="approach-grid">
+    <div class="approach-card reveal">
+      <div class="approach-icon">◯</div>
+      <div class="approach-title">See What Others Miss</div>
+      <div class="approach-text">Pattern recognition across domains.
+Connecting dots between psychology, technology, wellness, and systems
+that others treat as separate worlds.</div>
+    </div>
+    <div class="approach-card reveal reveal-delay-1">
+      <div class="approach-icon">△</div>
+      <div class="approach-title">Build What Matters</div>
+      <div class="approach-text">Platforms, not just projects. Systems
+that grow, connect, and compound over time. Every piece feeds the
+larger ecosystem.</div>
+    </div>
+    <div class="approach-card reveal reveal-delay-2">
+      <div class="approach-icon">◇</div>
+      <div class="approach-title">Values First, Always</div>
+      <div class="approach-text">The best work comes from genuine
+exchange — shared curiosity, mutual respect, and the momentum that
+builds when values align. Energy over transaction.</div>
+    </div>
+  </div>
+</section>
+
+<!-- DOMAINS -->
+<section class="domains">
+  <div class="domains-inner">
+    <div class="section-header reveal">
+      <h2 class="section-title">Domains</h2>
+      <span class="section-meta">Where the threads converge</span>
+    </div>
+    <div class="domain-grid reveal">
+      <span class="domain-pill">Documentary Film</span>
+      <span class="domain-pill">Mind-Body Medicine</span>
+      <span class="domain-pill">Wellness & Well-being</span>
+      <span class="domain-pill">Psychology</span>
+      <span class="domain-pill">AI Ethics & Experience</span>
+      <span class="domain-pill">Web & Platform Building</span>
+      <span class="domain-pill">Systems Thinking</span>
+      <span class="domain-pill">Innovation Strategy</span>
+      <span class="domain-pill">Genealogical Research</span>
+      <span class="domain-pill">Curation & Pattern Recognition</span>
+      <span class="domain-pill">Creative Direction</span>
+      <span class="domain-pill">Values-Based Design</span>
+    </div>
+  </div>
+</section>
+
+<!-- POWERHOUSE MOMENT -->
+<section class="powerhouse-moment">
+  <div class="powerhouse-text" aria-hidden="true">
+    <span class="pw-line">Powerhouse</span>
+    <span class="pw-line pw-line-soul">with Soul</span>
+  </div>
+</section>
+
+<!-- CONNECT -->
+<section class="connect" id="connect">
+  <div class="connect-grid">
+    <div class="reveal">
+      <h2 class="connect-headline">
+        Let's build<br>
+        something<br>
+        <em>extraordinary.</em>
+      </h2>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="connect-body">
+        <p>I collaborate with filmmakers, academics, researchers,
+entrepreneurs, and anyone who sees the world a little differently. If
+you're working on something that could use a fresh lens — or if you're
+curious about what becomes possible when perspective shifts — let's
+talk.</p>
+      </div>
+      <a href="/cdn-cgi/l/email-protection#89e1ece5e5e6c9fbecffe0fae0e6e7e8e7eaeca7eae6e4"
+class="connect-cta">Get in Touch <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">© 2026 — All rights reserved</div>
+  <div class="footer-center">Keli Ballinger</div>
+  <div class="footer-right">Powerhouse with Soul</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal, .powerhouse-text').forEach(el =>
+observer.observe(el));
+</script>
+
